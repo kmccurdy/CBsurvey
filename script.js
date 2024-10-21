@@ -26,6 +26,8 @@ function calculateCluster() {
 
     clusterCenters.forEach(cluster => {
         const distance = calculateDistance(responses, cluster.center);
+        console.log(cluster.name)
+        console.log(distance)
         if (distance < smallestDistance) {
             smallestDistance = distance;
             bestFitCluster = cluster.name;
