@@ -67,12 +67,24 @@ function displayResult(cluster, projection) {
     youBox.style.color = cluster.color;
 
     // Assuming the plot image is 1000x1000 pixels for this example
-    const plotWidth = 1000;
-    const plotHeight = 1000;
+    //const plotWidth = 1000;
+    //const plotHeight = 1000;
 
     // Map the projection coordinates to the plot dimensions
-    const xPos = (projection.x + 1) / 2 * plotWidth; // Adjust based on your coordinate system
-    const yPos = (1 - (projection.y + 1) / 2) * plotHeight; // Adjust based on your coordinate system
+    //const xPos = (projection.x + 1) / 2 * plotWidth; // Adjust based on your coordinate system
+    //const yPos = (1 - (projection.y + 1) / 2) * plotHeight; // Adjust based on your coordinate system
+
+    const plotImage = document.querySelector('.plot-image');
+    const plotWidth = plotImage.clientWidth;
+    const plotHeight = plotImage.clientHeight;
+
+    // Define the plot's coordinate ranges
+    const xRange = { min: -10, max: 15 };
+    const yRange = { min: -10, max: 10 };
+
+    // Calculate relative positions
+    const xPos = ((projection.x - xRange.min) / (xRange.max - xRange.min)) * plotWidth;
+    const yPos = ((yRange.max - projection.y) / (yRange.max - yRange.min)) * plotHeight;
 
     youBox.style.left = `${xPos}px`;
     youBox.style.top = `${yPos}px`;
