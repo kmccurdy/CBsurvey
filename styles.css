@@ -76,3 +76,12 @@ button:hover {
     display: block;
     margin: 0 auto;
 }
+
+.you-box {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-top: 20px;
+}
