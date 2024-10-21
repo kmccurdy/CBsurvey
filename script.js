@@ -32,7 +32,9 @@ function calculateCluster() {
         }
     });
 
-    document.getElementById('result').innerText = `Best fit cluster: ${bestFitCluster}`;
+    //document.getElementById('result').innerText = `Best fit cluster: ${bestFitCluster}`;
+    const projection = calculateProjection(responses, basisVectors);
+    displayResult(bestFitCluster, projection);
 }
 
 function calculateDistance(arr1, arr2) {
@@ -41,4 +43,37 @@ function calculateDistance(arr1, arr2) {
         sum += Math.pow(arr1[i] - arr2[i], 2);
     }
     return Math.sqrt(sum);
+}
+
+function calculateProjection(responses, basis) {
+    const x = dotProduct(responses, basis.x);
+    const y = dotProduct(responses, basis.y);
+    return { x, y };
+}
+
+function dotProduct(arr1, arr2) {
+    return arr1.reduce((sum, value, index) => sum + value * arr2[index], 0);
+}
+
+function displayResult(cluster, projection) {
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `
+        <p>Best fit cluster: ${cluster.name}</p>
+        <p>Projection: (${projection.x.toFixed(2)}, ${projection.y.toFixed(2)})</p>
+    `;
+
+    const youBox = document.getElementById('youBox');
+    youBox.style.borderColor = cluster.color;
+    youBox.style.color = cluster.color;
+
+    // Assuming the plot image is 1000x1000 pixels for this example
+    const plotWidth = 1000;
+    const plotHeight = 1000;
+
+    // Map the projection coordinates to the plot dimensions
+    const xPos = (projection.x + 1) / 2 * plotWidth; // Adjust based on your coordinate system
+    const yPos = (1 - (projection.y + 1) / 2) * plotHeight; // Adjust based on your coordinate system
+
+    youBox.style.left = `${xPos}px`;
+    youBox.style.top = `${yPos}px`;
 }
