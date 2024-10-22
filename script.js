@@ -58,9 +58,9 @@ function dotProduct(arr1, arr2) {
 function displayResult(cluster, projection) {
     const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = `
-        <p>Best fit cluster: ${cluster.name}</p>
-        <p>Projection: (${projection.x.toFixed(2)}, ${projection.y.toFixed(2)})</p>
+        <p>Your cluster: ${cluster.name}</p>
     `;
+    // <p>Projection: (${projection.x.toFixed(2)}, ${projection.y.toFixed(2)})</p>
 
     const youBox = document.getElementById('youBox');
     youBox.style.borderColor = cluster.color;
